@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Tasks</title>
+    <link rel="icon" href="index.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-leaf"></i> Anchor Tasks</h1>
+                <p class="subtitle">Organize your life with style and efficiency</p>
+            </div>
+            <div class="header-actions">
+                <a href="about.html" class="btn-about" target="_self">
+                    <i class="fas fa-users"></i> About Us
+                </a>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Task Input Section -->
+            <section class="input-section glassmorphism">
+                <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                <div class="input-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                        <input type="text" id="taskInput" placeholder="What needs to be done?">
+                    </div>
+                    <div class="priority-selector">
+                        <label>Priority:</label>
+                        <div class="priority-options">
+                            <button class="priority-btn" data-priority="low">Low</button>
+                            <button class="priority-btn active" data-priority="medium">Medium</button>
+                            <button class="priority-btn" data-priority="high">High</button>
+                        </div>
+                    </div>
+                    <button id="addTaskBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </div>
+            </section>
+
+            <!-- Control Section -->
+            <section class="control-section">
+                <div class="search-container glassmorphism">
+                    <div class="search-with-icon">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search tasks...">
+                    </div>
+                </div>
+                
+                <div class="filter-container glassmorphism">
+                    <div class="filter-group">
+                        <h3><i class="fas fa-filter"></i> Filter</h3>
+                        <select id="filterSelect">
+                            <option value="all">All Tasks</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <h3><i class="fas fa-sort-amount-down"></i> Sort</h3>
+                        <select id="sortSelect">
+                            <option value="added">Date Added</option>
+                            <option value="priority">Priority</option>
+                            <option value="name">Task Name</option>
+                        </select>
+                    </div>
+                    <button id="clearCompleted" class="btn-secondary">
+                        <i class="fas fa-trash"></i> Clear Completed
+                    </button>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="stat-card glassmorphism">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Tasks</h3>
+                        <p id="totalTasks" class="stat-number">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card glassmorphism">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Completed</h3>
+                        <p id="completedTasks" class="stat-number">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card glassmorphism">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending</h3>
+                        <p id="pendingTasks" class="stat-number">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card glassmorphism">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Progress</h3>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <span id="progressPercent" class="progress-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task List Section -->
+            <section class="task-list-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-clipboard-list"></i> Your Tasks</h2>
+                    <div class="task-count">
+                        <span id="visibleTasks">0</span> tasks shown
+                    </div>
+                </div>
+                
+                <div id="taskList" class="task-list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+                
+                <div id="emptyState" class="empty-state glassmorphism">
+                    <div class="empty-icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3>All caught up!</h3>
+                    <p>No tasks to display. Add a new task above to get started.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-leaf"></i>
+                    <span>Anchor Tasks</span>
+                </div>
+                <p class="footer-copyright">© 2024 Anchor Tasks</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content glassmorphism">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Task</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-input-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                        <input type="text" id="editTaskInput" placeholder="Edit task...">
+                    </div>
+                    <div class="priority-selector">
+                        <label>Priority:</label>
+                        <div class="priority-options">
+                            <button class="priority-btn" data-priority="low">Low</button>
+                            <button class="priority-btn active" data-priority="medium">Medium</button>
+                            <button class="priority-btn" data-priority="high">High</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="cancelEditBtn" class="btn-secondary">Cancel</button>
+                    <button id="saveEditBtn" class="btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content glassmorphism confirm-modal">
+            <div class="modal-body">
+                <i class="fas fa-question-circle"></i>
+                <h3 id="confirmMessage">Are you sure?</h3>
+                <div class="modal-actions">
+                    <button id="confirmCancelBtn" class="btn-secondary">Cancel</button>
+                    <button id="confirmOkBtn" class="btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Task added successfully!</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
